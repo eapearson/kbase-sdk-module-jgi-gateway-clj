@@ -1,0 +1,3 @@
+test_local
+clojure/devdata/*
+!clojure/devdata/README.md

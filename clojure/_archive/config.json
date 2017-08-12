@@ -1,0 +1,14 @@
+{
+    "handle-service-url": "https://ci.kbase.us/services//handle_service",
+    "jgi-host": "https://jgi-kbase.nersc.gov",
+    "auth-service-url": "https://ci.kbase.us/services/auth/api/legacy/KBase/Sessions/Login",
+    "srv-wiz-url": "https://ci.kbase.us/services//service_wizard",
+    "job-service-url": "https://ci.kbase.us/services//userandjobstate",
+    "auth-service-url-allow-insecure": "false",
+    "njsw-url": "https://ci.kbase.us/services//njs_wrapper",
+    "shock-url": "https://ci.kbase.us/services//shock-api",
+    "workspace-url": "https://ci.kbase.us/services//ws",
+    "scratch": "/kb/module/work/tmp",
+    "jgi-token": "kbase:1S9UC1BWBBURMY1LOWRU",
+    "kbase-endpoint": "https://ci.kbase.us/services/"
+}

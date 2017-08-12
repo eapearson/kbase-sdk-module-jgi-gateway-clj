@@ -1,0 +1,17 @@
+module-name:
+    jgi_gateway_eap
+
+module-description:
+    Gateway service to JGI search and staging service
+
+service-language:
+    java
+
+module-version:
+    0.0.1
+
+owners:
+    [scanon,eapearson]
+
+service-config:
+    dynamic-service: true

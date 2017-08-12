@@ -1,0 +1,29 @@
+{
+"version": "1.1",
+"id": "someid",
+"method": "jgi_gateway_eap.search_jgi",
+"params": [
+  {"search_string": "fasta",
+   "limit": 10,
+   "page": 1}
+]
+}
+
+{
+"version": "1.1",
+"id": "someid",
+"method": "jgi_gateway_eap.stage_objects",
+"params": [
+  {"ids": ["587b58df7ded5e4229d88737"]}
+]
+}
+
+Next steps:
+
+- all config values need to be obtained from the deploy config!!
+
+- add comments
+
+- excise old code
+
+- goal is to get it registered and on CI, leave more niceties for later.
