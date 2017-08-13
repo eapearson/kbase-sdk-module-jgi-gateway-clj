@@ -37,7 +37,7 @@ The data file you create should be placed in ```devdata/config.properties```
 
 To generate the config file used by the module service, we need to take the config.properties file and create our own deploy configuration file. Although the convention is to name this file "deploy.cfg", implying also a INI format, since the path to this file is provided to your service in an environment variable which you populate, it is really up to you.
 
-I would advise a format which is most naturally, reliably, and easily ingested by your code. A canonical example might be JSON for Javascript. For clojure, it might be EDN.
+I would advise a format which is most naturally, reliably, and easily ingested by your code. A canonical example might be JSON for Javascript; EDN for Clojure; properties for Java.
 
 > At present, since this project was initially modeling the precise behavior of traditional KBase SDK apps, it still uses a cfg format. This requires one extra dependency and a configuration transoformation step in the server, since cfg only represents data as strings.
 
