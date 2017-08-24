@@ -6,7 +6,7 @@
   (:require [clojure.string :as string])
   (:require [clojure.data.json :as json])
   (:require [ring.middleware.stacktrace :as stacktrace])
-  (:require [compojure.core :as cjr])
+  (:require [compojure.core :refer :all])
   (:require [compojure.route :as route])
   ;; routes
   (:require [server.routes.rpc :as rpc])
@@ -17,23 +17,36 @@
   ;; clojure boilerplate
   (:gen-class))
 
+(defn just-404
+  [request] 
+  {:status 404
+   :headers {"Content-Type" "text/plain"}
+   :body "Route not found"})
+
 ;; We just have one top-level route, rpc.
-(cjr/defroutes routes
-  (cjr/POST "/rpc" request
-            (rpc/handle request)))
+(defroutes app-routes
+  (POST "/rpc" request (rpc/handle request))
+  (GET "/test" [] "hi")
+  (route/not-found "Page not found"))
 
 ;; app is the main handler for the service web app. 
 ;; it can be used directly fom the project.clj ring plugin,
 ;; or in the direct call to jetty as in the main function below.
 (def app
-  (-> config/wrap-config
-      routes 
-      stacktrace/wrap-stacktrace))
+  (-> app-routes 
+      config/wrap-config))
+      ;; spy/wrap-spy
+      ;; stacktrace/wrap-stacktrace))
+
+(defn init
+  []
+  (config/load-config))
 
 ;; -main is the primary entrypoint to the service, both for the server and 
 ;; the "async" command line version.
 (defn -main [& args]
   (let [{:keys [options arguments errors summary]} (parse-opts args [])]
+
     (cond
       ;; Service interface
       (= 1 (count arguments))

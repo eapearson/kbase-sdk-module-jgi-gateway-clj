@@ -16,7 +16,8 @@
   ;; The uberjar provides uberjar building configuration 
   :profiles {:service {:main server.core}
              :deploy {:main deploy.core}
-             :dev {:ring {:handler server.core/app}}
+             :dev {:ring {:handler server.core/app
+                          :init server.core/init}}
              :uberjar {:aot :all}
   }
   :main nil
@@ -25,6 +26,7 @@
                  [org.clojure/tools.cli "0.3.5"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/core.cache "0.6.5"]
+                 [org.clojure/core.async "0.3.443"]
                  [me.raynes/fs "1.4.6"]
                  [clojure-ini "0.0.2"]
                  [stencil "0.5.0"]

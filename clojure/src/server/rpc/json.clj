@@ -4,6 +4,7 @@
   (:require [server.methods.search-jgi :as search-jgi])
   (:require [server.methods.stage-objects :as stage-objects])
   (:require [server.methods.stage-status :as stage-status])
+  (:require [server.methods.list-jobs :as list-jobs])
   (:require [server.config :as config])
   (:require [server.auth :as auth]))
 
@@ -37,11 +38,14 @@
                                                :auth-required? true}
                  "jgi_gateway_eap.stage_objects" {:call stage-objects/call
                                                   :auth-required? true}
+                 "jgi_gateway_eap.list_jobs" {:call list-jobs/call
+                                                  :auth-required? true}
                  "jgi_gateway_eap.stage_status" {:call stage-status/call
                                                   :auth-required? true}})
 
 (defn dispatch [request]
-  (let [message (:json-rpc-message request)]
+  (let [message (:json-rpc-message request)
+        config (:config request)]
     (if-let [method-spec (get method-map (:method message))]
         ;; TODO: we should really do a roles-based check here.
         (if (and (:auth-required? method-spec)
@@ -56,7 +60,7 @@
             (let [params (:params message)
                   ;; the user-id will be deposited if the token validates.
                   context {:user-id (:auth/user-id request "eapearson")}
-                  result (apply (:call method-spec) [params context])]
+                  result (apply (:call method-spec) [params context config])]
               {:status 200
               :headers {"Content-type" "application/json"}
               :body (json/write-str {"version" "1.1"

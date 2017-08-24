@@ -80,7 +80,7 @@ $ export KB_SERVICE_NAME=jgi_gateway_clj
 
 #### Development Operation
 
-On of the advantages of using Clojure is that it supports a very productive workflow for working on source while a server is running. This is possible due to the language itself, and its integration into the JVM, but also Leinengens ring plugin provides the easy configuration and smooth operation:
+On of the advantages of using Clojure is that it supports a very productive workflow for working on source while a server is running, and having those changes reflected immediately in the running server. This is possible due to the language itself, and its integration into the JVM, but also Leinengen's ring plugin provides the easy configuration and smooth operation:
 
 The plugin is enabled in the project.clj file. To enable live server coding issue this command from the terminal:
 
@@ -129,6 +129,12 @@ In order to operate against our locally deployed service, which is a dynamic ser
 
 We could simply code around this, by making direct calls to the service using the generic client (used for requests to core services) to make requests of our localost:3000 service. But this would be messy, and require code changes just to support working against the local service.
 
+To provide the ability to override a service which is normally accessed through the dynamic service mechanism, we can simply define it in the services configuration, setting the service name to that of the module name.
+
+The dynamic service client will check if a service configuration key exists like ```services.NAME.url```. If it does, it will use that value, otherwise, it will call the service wizard to fetch the current url, and use that.
+
+<!-- > scratch below, I think
+
 In the UI configuration, we can utilize the service wizard override configuration group. This setting, found in ```config/services.yml``` provides a service setting very similar to a core service, with the following differences:
 
 - the top level key is serviceWizardOverride
@@ -144,7 +150,7 @@ serviceWizardOverride:
         url: https://{{ deploy.services.urlBase }}/devservices/jgi_gateway_clj/rpc
 ```
 
-The service wizard client itself knows to look for the override configuration whenever it handles a request for a given module.
+The service wizard client itself knows to look for the override configuration whenever it handles a request for a given module. -->
 
 #### Operating behind a proxy
 
@@ -172,7 +178,9 @@ From the development directory, enter the vm and install JDK 8.
 ```bash
 $ vagrant ssh
 $ sudo add-apt-repository ppa:openjdk-r/ppa
+$ sudo apt-get update
 $ sudo apt-get install openjdk-8-jdk
+$ sudo udpate-ca-certificates -f
 ```
 
 Make sure the module works.
@@ -182,7 +190,7 @@ $ cd /vagrant/jgi_gateway_clj/clojure
 $ bash ./scripts/dev.sh
 ```
 
-If it starts
+## Deploying
 
 ### Make the server
 
@@ -203,10 +211,16 @@ Here is the manual process:
 
 > TODO: wirite a script for this
 
+this will help find the project version, which we need in order to identify the correct uberjar file in target:
+
+https://stackoverflow.com/questions/16270805/how-to-get-the-version-of-the-current-clojure-project-in-the-repl
+
+We we need to do is create another clojure main script to handle preparation of the distrubution.
+
 
 ### Make a docker image
 
-```
+````
 docker build -t jgi-gateway-clj .
 ```
 
@@ -222,6 +236,8 @@ Run it directly:
 For server mode:
 
 ```
+export KB_DEPLOYMENT_CONFIG=`pwd`/deploy.cfg
+export KB_SERVICE_NAME=jgi_gateway_clj
 java -cp server.jar server.core ${PORT}
 ```
 

@@ -10,6 +10,8 @@
 
 (defn fetch-token-info
     [token]
+    ;; TODO: use the config
+    (println "fetching token info")
     (let [url (str "https://ci.kbase.us/services/auth" "/api/V2/token")
           header {"Authorization" token}
           options {:timeout 5000
@@ -36,6 +38,7 @@
 ;; TODO: remove token from cache if it has expired? Maybe, but then we'll just fetch it again.
 (defn ensure-token
   [token]
+  (println "ensuring token...")
   (let [{:keys [expires user name cachefor] :as token-info} (token-info token)
         now (inst-ms (java.time.Instant/now))]
     (if (and expires (> expires now))
