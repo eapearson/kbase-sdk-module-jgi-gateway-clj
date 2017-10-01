@@ -2,56 +2,20 @@
     (:require [clojure.core.async :refer [<! go-loop timeout chan]])
     (:require [server.api.jgi-gateway :as jgi-gateway]))
 
-(def jobs (atom {}))
 
-(defn get-job
-    [key]
-    (@jobs key))
+;; The state namespace is used to create and manage a globally available
+;; sense of application state -- an app database if you will.
 
-(defn add-job
-    [key state]
-    (swap! jobs assoc key state))
-    ; (start-monitoring-jobs))
+;; What is it?
 
-(defn update-job
-    [key state]
-    (swap! jobs assoc key state))
+;; Simply a single atom.
 
-(defn remove-job
-    [key]
-    (swap! jobs dissoc key))
+;; I don't know that we need a separate ns/module for this, but 
+;; we may need some common functions, so leave in place for now.
 
-(defn get-jobs
+;; Jobs are, for now, simply a map of job id to some structure.
+;; Stored in an atom because we expect concurrent access.
+(defn make-state
     []
-    @jobs)
+    (atom {}))
 
-;; receives timeout events
-(def job-tickler (chan))
-
-(defn get-job-status
-    [id config]
-    (let [[result _] (jgi-gateway/status id config)]
-        result))
-
-(defn update-jobs
-    [config]
-    (let [update-count (atom)]
-      (doseq [[id status] @jobs]
-        (when (not (= status "completed"))
-          (swap! update-count + 1)
-          (let [job-status (get-job-status id config)]
-            (swap! jobs assoc key job-status))))
-      update-count))
-    
-
-(defn start-monitoring-jobs
-    [config]
-    ;; set up 
-    (go-loop []
-        (<! (timeout 1000))
-        (when (update-jobs config)
-            (recur))))
-            
-(defn stop-monitoring-jobs
-    []
-)

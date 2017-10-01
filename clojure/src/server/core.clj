@@ -8,12 +8,15 @@
   (:require [ring.middleware.stacktrace :as stacktrace])
   (:require [compojure.core :refer :all])
   (:require [compojure.route :as route])
+  ;; own deps
+  ; (:require [server.jobs :as jobs])
   ;; routes
   (:require [server.routes.rpc :as rpc])
   (:require [server.async-app :as async-app])
   ;; middlewares
   (:require [server.middleware.config :as config])
   (:require [server.middleware.spy :as spy])
+  (:require [server.middleware.app-state :as app-state])
   ;; clojure boilerplate
   (:gen-class))
 
@@ -29,11 +32,25 @@
   (GET "/test" [] "hi")
   (route/not-found "Page not found"))
 
+;; This is our one atom to contain all app state.
+;; It is an atom wrapping a map.
+;; In the spirit of ring, some component of the system
+;; may lay claim to a top level map key.
+;; That is about it.
+;; Note: it might be nice if ring natively supported
+;; a factory function for app, which could be used to 
+;; establish values like app-state contained within
+;; a function. This would apply to routes define as well.
+; (def app-state (state/make-state))
+
+; (swap! app-state assoc :jobs (jobs/make-jobs))
+
 ;; app is the main handler for the service web app. 
 ;; it can be used directly fom the project.clj ring plugin,
 ;; or in the direct call to jetty as in the main function below.
 (def app
   (-> app-routes 
+      ; (app-state/wrap app-state)
       config/wrap-config))
       ;; spy/wrap-spy
       ;; stacktrace/wrap-stacktrace))

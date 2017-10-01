@@ -23,7 +23,7 @@ For development we will be supplying our own configuration. Although we will be 
 
 > Note: For kb-sdk users, this material presented here is implicit in the tools used. However, since this is an exercise in getting down the bare bones of SDK development, we want to understandthis.
 
-To be most polite, one should as a core SDK developer or sysops person to provide a sample of the config data file used in CI.
+To be most polite, one should ask a core SDK developer or sysops person to provide a sample of the config data file used in CI.
 
 In developing this module, though, I used a technique to reveal the file. I created a small module which just returns the config data file it lives in ```/kb/deployment/config.properties``` in the container in which the module is run. 
 
@@ -102,7 +102,7 @@ The entire shebang would look like this:
 
 ```bash
 $ lein with-profile deploy run ./templates/deploy.template.cfg ./devdata/config.properties ./devdata/deploy.cfg
-$ export KB_DEPLOYMENT_CONFIG=`pwd`/deploy.cfg
+$ export KB_DEPLOYMENT_CONFIG=`pwd`/devdata/deploy.cfg
 $ export KB_SERVICE_NAME=jgi_gateway_clj
 $ lein with-profile dev ring server-headless
 ```
@@ -209,7 +209,7 @@ Here is the manual process:
 - cp clojure/server/scripts/Makefile dist/module/Makefile
 <!-- - copy clojure/server/scripts/run.sh dist/module/run.sh -->
 
-> TODO: wirite a script for this
+> TODO: write a script for this
 
 this will help find the project version, which we need in order to identify the correct uberjar file in target:
 

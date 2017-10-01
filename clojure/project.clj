@@ -27,6 +27,7 @@
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.3.443"]
+                 [org.clojure/core.match "0.3.0-alpha5"]
                  [me.raynes/fs "1.4.6"]
                  [clojure-ini "0.0.2"]
                  [stencil "0.5.0"]

@@ -10,6 +10,6 @@
   [[{:keys [ids]}] {:keys [user-id]} config]
   (let [[result elapsed] (jgi-gateway/fetch ids user-id config)
         job-id (get result "id")]
-    (state/add-job job-id nil)
+    ; (state/add-job job-id nil)
     [{"job_id" job-id}
      {"request_elapsed_time" elapsed}]))

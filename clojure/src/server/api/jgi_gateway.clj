@@ -2,6 +2,7 @@
   (:require [clojure.data.json :as json])
   (:require [clojure.string :as string])
   (:require [clojure.java.io :as io])
+  (:require [clojure.core.async :as async])
   (:require [org.httpkit.client :as http]))
 
 ;; Note that the body is just read as a string for now, since the 
@@ -20,7 +21,29 @@
     ;; TODO: use slinghsot
     (let [elapsed (- (inst-ms (java.time.Instant/now)) start)]
       (if error (throw (Exception. "Error running call"))
-        [{:message body} elapsed]))))
+        [:message body elapsed]))))
+
+;; The async version
+(defn <status
+  [id config]
+  (let [options {:timeout (:call-timeout config)
+                 :basic-auth [(:jgi-username config) (:jgi-password config)]
+                 ;; :headers {"Content-Type" "application/json"}
+                 :query-params {:id id}
+                 :as :text}
+        url (str (:jgi-host config) "/status")
+        start (inst-ms (java.time.Instant/now))
+        out (async/chan)]
+
+    (http/get url options (fn [{:keys [status headers body error]}]
+                            (let [elapsed (- (inst-ms (java.time.Instant/now)) start)]
+                              (if error (throw (Exception. "Error running call"))
+                                  (async/go (async/>! out [:ok body elapsed])))))
+                          (fn [exception]
+                            (let [elapsed (- (inst-ms (java.time.Instant/now)) start)]
+                              (async/go (async/>! out [:er "Error getting status" exception elapsed])))))
+    out))
+      
 
 
 (defn fetch

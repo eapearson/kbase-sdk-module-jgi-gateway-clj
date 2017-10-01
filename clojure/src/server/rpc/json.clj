@@ -1,10 +1,11 @@
 (ns server.rpc.json
   (:require [clojure.data.json :as json])
+  (:require [clojure.string :as string])
   (:require [server.methods.status :as status])
   (:require [server.methods.search-jgi :as search-jgi])
   (:require [server.methods.stage-objects :as stage-objects])
   (:require [server.methods.stage-status :as stage-status])
-  (:require [server.methods.list-jobs :as list-jobs])
+  ; (:require [server.methods.list-jobs :as list-jobs])
   (:require [server.config :as config])
   (:require [server.auth :as auth]))
 
@@ -38,15 +39,17 @@
                                                :auth-required? true}
                  "jgi_gateway_eap.stage_objects" {:call stage-objects/call
                                                   :auth-required? true}
-                 "jgi_gateway_eap.list_jobs" {:call list-jobs/call
-                                                  :auth-required? true}
+                ;  "jgi_gateway_eap.list_jobs" {:call list-jobs/call
+                ;                                   :auth-required? true}
                  "jgi_gateway_eap.stage_status" {:call stage-status/call
                                                   :auth-required? true}})
 
 (defn dispatch [request]
   (let [message (:json-rpc-message request)
+        [module-name method-name] (string/split (:method message) #"\.")
         config (:config request)]
-    (if-let [method-spec (get method-map (:method message))]
+        
+    (if-let [method-spec (get method-map method-name)]
         ;; TODO: we should really do a roles-based check here.
         (if (and (:auth-required? method-spec)
                   (not (:auth/user-id request)))
