@@ -2,8 +2,8 @@
   (:require [clojure.data.json :as json])
   (:require [clojure.string :as string])
   (:require [server.methods.status :as status])
-  (:require [server.methods.search-jgi :as search-jgi])
-  (:require [server.methods.stage-objects :as stage-objects])
+  (:require [server.methods.search :as search])
+  (:require [server.methods.stage :as stage])
   (:require [server.methods.stage-status :as stage-status])
   ; (:require [server.methods.list-jobs :as list-jobs])
   (:require [server.config :as config])
@@ -33,16 +33,16 @@
   (let [json (json/read (clojure.java.io/reader (:body request)) :key-fn clojure.core/keyword)]
     (assoc request :json-rpc-message json)))
 
-(def method-map {"jgi_gateway_eap.status" {:call status/call
-                                           :auth-required? false}
-                 "jgi_gateway_eap.search_jgi" {:call search-jgi/call
-                                               :auth-required? true}
-                 "jgi_gateway_eap.stage_objects" {:call stage-objects/call
-                                                  :auth-required? true}
+(def method-map {"status" {:call status/call 
+                           :auth-required? false}
+                 "search" {:call search/call 
+                           :auth-required? true}
+                 "stage" {:call stage/call 
+                          :auth-required? true}
                 ;  "jgi_gateway_eap.list_jobs" {:call list-jobs/call
                 ;                                   :auth-required? true}
-                 "jgi_gateway_eap.stage_status" {:call stage-status/call
-                                                  :auth-required? true}})
+                 "stage_status" {:call stage-status/call
+                                 :auth-required? true}})
 
 (defn dispatch [request]
   (let [message (:json-rpc-message request)
@@ -60,16 +60,30 @@
                                     "id" (:id message)
                                     "error" "No authorization"})}
             ;; Authorization not required, or required and available.
+
             (let [params (:params message)
                   ;; the user-id will be deposited if the token validates.
-                  context {:user-id (:auth/user-id request "eapearson")}
-                  result (apply (:call method-spec) [params context config])]
-              {:status 200
-              :headers {"Content-type" "application/json"}
-              :body (json/write-str {"version" "1.1"
-                                      "id" (:id message)
-                                      "result" result})}))
-            "Sorry, not found")))
+                  context {:user-id (:auth/user-id request)}]
+                (try (let [result (apply (:call method-spec) [params context config])]
+                        {:status 200
+                        :headers {"Content-type" "application/json"}
+                        :body (json/write-str {"version" "1.1"
+                                                "id" (:id message)
+                                                "result" result})})
+                      (catch Exception e 
+                        (do 
+                        (println "Error from method call" (.getMessage e))
+                        {:status 500
+                         :headers {"Content-type" "application/json"}
+                         :body (json/write-str {"version" "1.1"
+                                                "id" (:id message)
+                                                "error" {"code" 2000 "message" (.getMessage e)}})})))))
+
+            {:status 404
+             :headers {"Content-type" "application/json"}
+             :body (json/write-str {"version" "1.1"
+                                   "id" (:id message)
+                                   "error" (str "Method not found: " method-name)})})))
 
 (defn validate [request]
   (let [json (:json-rpc-message request)]

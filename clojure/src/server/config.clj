@@ -39,6 +39,7 @@
      :jgi-username username
      :jgi-password password
      :jgi-host (:jgi-host service-config)
+     :connection-timeout (Integer/parseInt (:connection-timeout service-config))
      :call-timeout (Integer/parseInt (:call-timeout service-config))
      :allow-insecure (= (:allow-insecure service-config) "true")
      :auth-service-url-allow-insecure (= (:allow-insecure service-config) "true")}))

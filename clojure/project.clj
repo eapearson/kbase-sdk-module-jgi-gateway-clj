@@ -8,12 +8,12 @@
             [lein-ancient "0.6.10"]]
   ;; This defines the entry point to the server
   ; :ring {:handler server.core/app}
-  ;; now with profiles!  
+  ;; now with profiles!
   ;; Profiles are now used
   ;; The service profile provides the main standalone server entry point
   ;; The deploy profile provides the deployment interface
   ;; The dev profile provides the develop-time rin server integration
-  ;; The uberjar provides uberjar building configuration 
+  ;; The uberjar provides uberjar building configuration
   :profiles {:service {:main server.core}
              :deploy {:main deploy.core}
              :dev {:ring {:handler server.core/app
@@ -22,7 +22,7 @@
   }
   :main nil
   ; :aot [server.core]
-  :dependencies [[org.clojure/clojure "1.9.0-alpha17"]
+  :dependencies [[org.clojure/clojure "1.9.0-beta1"]
                  [org.clojure/tools.cli "0.3.5"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/core.cache "0.6.5"]
@@ -35,5 +35,6 @@
                  [clojurewerkz/propertied "1.3.0"]
                  [ring/ring "1.6.2"]
                  [ring/ring-jetty-adapter "1.6.2"]
+                 [ring-logger "0.7.7"]
                  [http-kit "2.2.0"]
                  [compojure "1.6.0"]])

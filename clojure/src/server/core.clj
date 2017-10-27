@@ -17,11 +17,12 @@
   (:require [server.middleware.config :as config])
   (:require [server.middleware.spy :as spy])
   (:require [server.middleware.app-state :as app-state])
+  (:require [ring.logger :as logger])
   ;; clojure boilerplate
   (:gen-class))
 
 (defn just-404
-  [request] 
+  [request]
   {:status 404
    :headers {"Content-Type" "text/plain"}
    :body "Route not found"})
@@ -38,36 +39,38 @@
 ;; may lay claim to a top level map key.
 ;; That is about it.
 ;; Note: it might be nice if ring natively supported
-;; a factory function for app, which could be used to 
+;; a factory function for app, which could be used to
 ;; establish values like app-state contained within
 ;; a function. This would apply to routes define as well.
 ; (def app-state (state/make-state))
 
 ; (swap! app-state assoc :jobs (jobs/make-jobs))
 
-;; app is the main handler for the service web app. 
+;; app is the main handler for the service web app.
 ;; it can be used directly fom the project.clj ring plugin,
 ;; or in the direct call to jetty as in the main function below.
-(def app
-  (-> app-routes 
-      ; (app-state/wrap app-state)
-      config/wrap-config))
+
       ;; spy/wrap-spy
       ;; stacktrace/wrap-stacktrace))
 
-(defn init
-  []
-  (config/load-config))
+; (defn init
+;   []
+;   )
 
-;; -main is the primary entrypoint to the service, both for the server and 
+;; -main is the primary entrypoint to the service, both for the server and
 ;; the "async" command line version.
 (defn -main [& args]
+  (config/load-config)
   (let [{:keys [options arguments errors summary]} (parse-opts args [])]
 
     (cond
       ;; Service interface
       (= 1 (count arguments))
-       (let [port (Integer/parseInt (first arguments))]
+       (let [port (Integer/parseInt (first arguments))
+             app (-> app-routes
+                     ; (app-state/wrap app-state)
+                     logger/wrap-with-logger
+                     config/wrap-config)]
         (jetty/run-jetty app {:port port}))
       ;; "Async" or command-line interface
       ;; context-file  - is actually the json-rpc payload in a file

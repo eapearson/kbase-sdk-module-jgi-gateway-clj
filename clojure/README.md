@@ -4,6 +4,19 @@ The JGI Gateway is a provides a kbase-facing interface to the jgi-nersc query ap
 
 ## Developing
 
+### Prerequisites
+
+#### Install java
+
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get install openjdk-8-jdk
+sudo update-ca-certificates -f
+https://leiningen.org/
+wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+chmod u+x lein
+sudo mv lein /usr/local/bin
+
+
 ### Configuration
 
 Before we run any kbase sdk based service, we need to satisfy a small set of requirements to supply configuration to it. 

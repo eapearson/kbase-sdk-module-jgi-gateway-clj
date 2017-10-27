@@ -7,8 +7,8 @@
 AUTH	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^AUTH = 'auth-service-url'$/;"	kind:variable	line:23
 Application	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^class Application(object):$/;"	kind:class	line:311
 BaseClient	../lib/jgi_gateway_eap/baseclient.py	/^class BaseClient(object):$/;"	kind:class	line:96
+ConfigParser	../_archive/scripts/prepare_deploy_cfg.py	/^from ConfigParser import ConfigParser$/;"	kind:namespace	line:5
 ConfigParser	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^from ConfigParser import ConfigParser$/;"	kind:namespace	line:14
-ConfigParser	../scripts/prepare_deploy_cfg.py	/^from ConfigParser import ConfigParser$/;"	kind:namespace	line:5
 ConfigParser	../test/jgi_gateway_server_test.py	/^    from ConfigParser import ConfigParser  # py2$/;"	kind:namespace	line:10
 ConfigParser	../test/jgi_gateway_server_test.py	/^    from configparser import ConfigParser  # py3$/;"	kind:namespace	line:12
 DEPLOY	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^DEPLOY = 'KB_DEPLOYMENT_CONFIG'$/;"	kind:variable	line:21
@@ -35,8 +35,8 @@ Reimport	../lib/jgi_gateway_eap/jgi_gateway_eapClient.py	/^    from baseclient i
 SERVICE	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^SERVICE = 'KB_SERVICE_NAME'$/;"	kind:variable	line:22
 ServerError	../lib/jgi_gateway_eap/baseclient.py	/^class ServerError(Exception):$/;"	kind:class	line:71
 ServerError	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^class ServerError(Exception):$/;"	kind:class	line:275
-StringIO	../scripts/prepare_deploy_cfg.py	/^import StringIO$/;"	kind:namespace	line:6
-Template	../scripts/prepare_deploy_cfg.py	/^from jinja2 import Template$/;"	kind:namespace	line:4
+StringIO	../_archive/scripts/prepare_deploy_cfg.py	/^import StringIO$/;"	kind:namespace	line:6
+Template	../_archive/scripts/prepare_deploy_cfg.py	/^from jinja2 import Template$/;"	kind:namespace	line:4
 TokenCache	../lib/jgi_gateway_eap/authclient.py	/^class TokenCache(object):$/;"	kind:class	line:14
 UnusedImport	../lib/jgi_gateway_eap/jgi_gateway_eapClient.py	/^    from .baseclient import BaseClient as _BaseClient  # @UnusedImport$/;"	kind:namespace	line:14
 VERSION	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^    VERSION = "0.0.1"$/;"	kind:variable	line:30
@@ -95,8 +95,8 @@ call	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def call(self, ctx, j
 call_method	../lib/jgi_gateway_eap/baseclient.py	/^    def call_method(self, service_method, args, service_ver=None,$/;"	kind:member	line:254
 call_py	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def call_py(self, ctx, jsondata):$/;"	kind:member	line:120
 clear_log_level	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def clear_log_level(self):$/;"	kind:member	line:232
+config	../_archive/scripts/prepare_deploy_cfg.py	/^    config = ConfigParser()$/;"	kind:variable	line:17
 config	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^config = get_config()$/;"	kind:variable	line:46
-config	../scripts/prepare_deploy_cfg.py	/^    config = ConfigParser()$/;"	kind:variable	line:17
 datetime	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^import datetime$/;"	kind:namespace	line:7
 debug	../lib/jgi_gateway_eap/jgi_gateway_eapClient.py	/^    def debug(self, context=None):$/;"	kind:member	line:72
 debug	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^    def debug(self, ctx):$/;"	kind:member	line:161
@@ -104,7 +104,7 @@ default	../lib/jgi_gateway_eap/baseclient.py	/^    def default(self, obj):$/;"	k
 default	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def default(self, obj):$/;"	kind:member	line:54
 environ	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^from os import environ$/;"	kind:namespace	line:13
 environ	../test/jgi_gateway_server_test.py	/^from os import environ$/;"	kind:namespace	line:8
-file	../scripts/prepare_deploy_cfg.py	/^    file = open(sys.argv[1], 'r')$/;"	kind:variable	line:14
+file	../_archive/scripts/prepare_deploy_cfg.py	/^    file = open(sys.argv[1], 'r')$/;"	kind:variable	line:14
 getContext	../test/jgi_gateway_server_test.py	/^    def getContext(self):$/;"	kind:member	line:73
 getIPAddress	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^def getIPAddress(environ):$/;"	kind:function	line:297
 getImpl	../test/jgi_gateway_server_test.py	/^    def getImpl(self):$/;"	kind:member	line:70
@@ -133,7 +133,7 @@ jgi_gateway_server_test.py	../test/jgi_gateway_server_test.py	1;"	kind:file	line
 json	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^import json$/;"	kind:namespace	line:9
 json	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^import json$/;"	kind:namespace	line:5
 json	../test/jgi_gateway_server_test.py	/^import json  # noqa: F401$/;"	kind:namespace	line:4
-kbase_endpoint	../scripts/prepare_deploy_cfg.py	/^        kbase_endpoint = os.environ.get("KBASE_ENDPOINT")$/;"	kind:variable	line:26
+kbase_endpoint	../_archive/scripts/prepare_deploy_cfg.py	/^        kbase_endpoint = os.environ.get("KBASE_ENDPOINT")$/;"	kind:variable	line:26
 log	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def log(self, level, context, message):$/;"	kind:member	line:319
 log	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^from biokbase import log$/;"	kind:namespace	line:15
 log_debug	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def log_debug(self, message, level=1):$/;"	kind:member	line:216
@@ -147,24 +147,24 @@ noqa	../test/jgi_gateway_server_test.py	/^from pprint import pprint  # noqa: F40
 noqa	../test/jgi_gateway_server_test.py	/^import json  # noqa: F401$/;"	kind:namespace	line:4
 noqa	../test/jgi_gateway_server_test.py	/^import os  # noqa: F401$/;"	kind:namespace	line:3
 now_in_utc	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def now_in_utc(self):$/;"	kind:member	line:484
+os	../_archive/scripts/prepare_deploy_cfg.py	/^import os$/;"	kind:namespace	line:2
+os	../_archive/scripts/prepare_deploy_cfg.py	/^import os.path$/;"	kind:namespace	line:3
 os	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^import os$/;"	kind:namespace	line:7
 os	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^import os$/;"	kind:namespace	line:18
-os	../scripts/prepare_deploy_cfg.py	/^import os$/;"	kind:namespace	line:2
-os	../scripts/prepare_deploy_cfg.py	/^import os.path$/;"	kind:namespace	line:3
 os	../test/jgi_gateway_server_test.py	/^import os  # noqa: F401$/;"	kind:namespace	line:3
-output	../scripts/prepare_deploy_cfg.py	/^    output = t.render(props)$/;"	kind:variable	line:48
-param_name	../scripts/prepare_deploy_cfg.py	/^                param_name = key[len('KBASE_SECURE_CONFIG_PARAM_'):]$/;"	kind:variable	line:23
-param_name	../scripts/prepare_deploy_cfg.py	/^                param_name = key[len('KBASE_SECURE_CONFIG_PARAM_'):]$/;"	kind:variable	line:42
-path	../scripts/prepare_deploy_cfg.py	/^import os.path$/;"	kind:namespace	line:3
+output	../_archive/scripts/prepare_deploy_cfg.py	/^    output = t.render(props)$/;"	kind:variable	line:48
+param_name	../_archive/scripts/prepare_deploy_cfg.py	/^                param_name = key[len('KBASE_SECURE_CONFIG_PARAM_'):]$/;"	kind:variable	line:23
+param_name	../_archive/scripts/prepare_deploy_cfg.py	/^                param_name = key[len('KBASE_SECURE_CONFIG_PARAM_'):]$/;"	kind:variable	line:42
+path	../_archive/scripts/prepare_deploy_cfg.py	/^import os.path$/;"	kind:namespace	line:3
 port	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^            port = int(a)$/;"	kind:variable	line:625
 port	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    port = 9999$/;"	kind:variable	line:621
 pprint	../test/jgi_gateway_server_test.py	/^from pprint import pprint  # noqa: F401$/;"	kind:namespace	line:14
-prepare_deploy_cfg.py	../scripts/prepare_deploy_cfg.py	1;"	kind:file	line:1
+prepare_deploy_cfg.py	../_archive/scripts/prepare_deploy_cfg.py	1;"	kind:file	line:1
 print_function	../lib/jgi_gateway_eap/baseclient.py	/^from __future__ import print_function$/;"	kind:namespace	line:8
 print_function	../lib/jgi_gateway_eap/jgi_gateway_eapClient.py	/^from __future__ import print_function$/;"	kind:namespace	line:9
 process_async_cli	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^def process_async_cli(input_file_path, output_file_path, token):$/;"	kind:function	line:556
 process_error	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def process_error(self, error, context, request, trace=None):$/;"	kind:member	line:466
-props	../scripts/prepare_deploy_cfg.py	/^    props = dict(config.items("global"))$/;"	kind:variable	line:47
+props	../_archive/scripts/prepare_deploy_cfg.py	/^    props = dict(config.items("global"))$/;"	kind:variable	line:47
 provenance	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^    def provenance(self):$/;"	kind:member	line:240
 py	../lib/jgi_gateway_eap/baseclient.py	/^    from ConfigParser import ConfigParser as _ConfigParser  # py 2$/;"	kind:namespace	line:18
 py	../lib/jgi_gateway_eap/baseclient.py	/^    from configparser import ConfigParser as _ConfigParser  # py 3$/;"	kind:namespace	line:16
@@ -185,14 +185,14 @@ start_server	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^def start_server(
 status	../lib/jgi_gateway_eap/jgi_gateway_eapClient.py	/^    def status(self, context=None):$/;"	kind:member	line:81
 status	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^    def status(self, ctx):$/;"	kind:member	line:179
 stop_server	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^def stop_server():$/;"	kind:function	line:550
+sys	../_archive/scripts/prepare_deploy_cfg.py	/^import sys$/;"	kind:namespace	line:1
 sys	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^import sys$/;"	kind:namespace	line:10
 sys	../lib/jgi_gateway_eap/jgi_gateway_eapServer.py	/^import sys$/;"	kind:namespace	line:4
-sys	../scripts/prepare_deploy_cfg.py	/^import sys$/;"	kind:namespace	line:1
-t	../scripts/prepare_deploy_cfg.py	/^    t = Template(text)$/;"	kind:variable	line:16
+t	../_archive/scripts/prepare_deploy_cfg.py	/^    t = Template(text)$/;"	kind:variable	line:16
 tearDownClass	../test/jgi_gateway_server_test.py	/^    def tearDownClass(cls):$/;"	kind:member	line:53
 test_search	../test/jgi_gateway_server_test.py	/^    def test_search(self):$/;"	kind:member	line:77
 test_staging	../test/jgi_gateway_server_test.py	/^    def test_staging(self):$/;"	kind:member	line:94
-text	../scripts/prepare_deploy_cfg.py	/^    text = file.read()$/;"	kind:variable	line:15
+text	../_archive/scripts/prepare_deploy_cfg.py	/^    text = file.read()$/;"	kind:variable	line:15
 time	../lib/jgi_gateway_eap/baseclient.py	/^import time$/;"	kind:namespace	line:24
 time	../lib/jgi_gateway_eap/jgi_gateway_eapImpl.py	/^import time$/;"	kind:namespace	line:11
 time	../test/jgi_gateway_server_test.py	/^import time$/;"	kind:namespace	line:5
