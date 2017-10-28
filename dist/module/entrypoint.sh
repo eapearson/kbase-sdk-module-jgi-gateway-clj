@@ -8,16 +8,16 @@
 #
 
 # PREPARE DEPLOY CONFIG
+
+# TODO: mount the work dir
 export KBASE_WORK_DIR=./work
 export KBASE_DEPLOY_DIR=/kb/deployment
 
 . $KBASE_DEPLOY_DIR/user-env.sh
 
+# Build the config file from the deploy template and the config properties
 java -cp service.jar deploy.core deploy.template.cfg $KBASE_WORK_DIR/config.properties deploy.cfg
 
-# python ./scripts/prepare_deploy_cfg.py ./deploy.cfg ./work/config.properties
-
-# ls ./work
 
 # PREPARE ENVIRONMENT VARIABLES
 

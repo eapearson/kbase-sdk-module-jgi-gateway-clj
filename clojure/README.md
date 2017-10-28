@@ -19,7 +19,7 @@ sudo mv lein /usr/local/bin
 
 ### Configuration
 
-Before we run any kbase sdk based service, we need to satisfy a small set of requirements to supply configuration to it. 
+Before we run any kbase sdk based service, we need to satisfy a small set of requirements to supply configuration to it.
 
 - one configuration file containing service endpoints and service configuration properties
 - two environment variables, one to point to the config file, the other to provide the name of the service.
@@ -38,11 +38,11 @@ For development we will be supplying our own configuration. Although we will be 
 
 To be most polite, one should ask a core SDK developer or sysops person to provide a sample of the config data file used in CI.
 
-In developing this module, though, I used a technique to reveal the file. I created a small module which just returns the config data file it lives in ```/kb/deployment/config.properties``` in the container in which the module is run. 
+In developing this module, though, I used a technique to reveal the file. I created a small module which just returns the config data file it lives in ```/kb/deployment/config.properties``` in the container in which the module is run.
 
 A copy of this file, with additional properties added and private data redacted, can be found in ```samples/config.properties```.  
 
-> Note that although this file is named like a Java properties file, it is in fact an INI file. The two formats are very similar, with one exception that INI files support sections. 
+> Note that although this file is named like a Java properties file, it is in fact an INI file. The two formats are very similar, with one exception that INI files support sections.
 
 The data file you create should be placed in ```devdata/config.properties```
 
@@ -76,9 +76,9 @@ The generated config file will be placed in ```devdata/deploy.cfg```.
 
 Two environment variables are required in order to properly hook the service up the runtime environment in deployment, so we must utilize them when developing too.
 
-The first is ```KB_DEPLOYMENT_CONFIG```, which contains the path to the deploy configuration file we created above. 
+The first is ```KB_DEPLOYMENT_CONFIG```, which contains the path to the deploy configuration file we created above.
 
-The second is ```KB_SERVICE_NAME```, which contains the "official", common name of the service. This is a spaceless string. It is the same name as used to name the module's spec file, and to name them module within the spec. It is also the name used to interact with the Service Wizard, and is used in other contexts as well. 
+The second is ```KB_SERVICE_NAME```, which contains the "official", common name of the service. This is a spaceless string. It is the same name as used to name the module's spec file, and to name the module within the spec. It is also the name used to interact with the Service Wizard, and is used in other contexts as well. 
 
 In our case, the service name is always "jgi_gateway_clj"
 
@@ -101,7 +101,7 @@ The plugin is enabled in the project.clj file. To enable live server coding issu
 $ lein with-profile dev ring server-headless
 ```
 
-or 
+or
 
 ```
 $ lein with-profile server run 3000
@@ -169,7 +169,7 @@ The service wizard client itself knows to look for the override configuration wh
 
 Since all service requests must operate over https, and since UI and Narrative development already requires and documents a proxy-within-vm development workflow, we will in fact be operating our development server inside the vm and inside the nginx proxy.
 
-This is very easy to do, just requiring 
+This is very easy to do, just requiring
 
 - setting up the service project alongside the ui or narrative
 - installing jdk 8 inside the vm
@@ -213,7 +213,7 @@ $ bash ./scripts/dev.sh
 
 This makes the jar with the server, invoked via server.main, and the deploy tool, invoked via deploy.main
 
-### Copy assets into the distribution 
+### Copy assets into the distribution
 
 Here is the manual process:
 
@@ -290,7 +290,7 @@ When a module app is run in async mode or a module is run in service mode and ac
 
 This script is set in the Dockerfile used to create the image, and by convension is called ```./entrypoint.sh```. We will continue to use that since it is a well known convention.
 
-### Deployment 
+### Deployment
 
 The first responsibility of the entrypoint script is to create the deployment configuration file. This is the heart of the reconfigurablity of modules; the configuration may be modified and the service restarted to rebuild the configuration file with new values.
 
@@ -337,7 +337,7 @@ The following properties may be set:
 - auth_service_url_allow_insecure
 - auth_service_url
 
-> Note that the requirement for a specific service setting depends upon whether the module requires that service url setting. If it is not required it should not be required in the configuration file template, nor in the codebase itself. 
+> Note that the requirement for a specific service setting depends upon whether the module requires that service url setting. If it is not required it should not be required in the configuration file template, nor in the codebase itself.
 
 > Note that depending upon the language and tools used to build the deploy config file, an error may or may not be generated if a required configuration key is present.
 
@@ -383,7 +383,7 @@ Again, since this is under control of the module, this should be no problem.
 Optional
 
 
-It is expected to start the service as either a json-rpc service or as a one-shot command line app. 
+It is expected to start the service as either a json-rpc service or as a one-shot command line app.
 
 The different startup modes are
 
